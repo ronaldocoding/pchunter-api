@@ -1,38 +1,39 @@
 package br.com.pchunter.model
 
+import br.com.pchunter.util.zeroLongNumber
 import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 
 @Entity
 data class Setup(
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     @JsonProperty(value = "id", access = JsonProperty.Access.READ_ONLY)
-    val id: Long,
+    val id: Long = zeroLongNumber(),
     @OneToOne(cascade = [CascadeType.PERSIST])
-    val cpu: Part,
+    val cpu: Part = Part(),
     @OneToOne(cascade = [CascadeType.PERSIST])
-    val motherboard: Part,
+    val motherboard: Part = Part(),
     @OneToMany(cascade = [CascadeType.PERSIST])
-    val gpus: List<Part>,
+    val gpus: List<Part> = listOf(Part()),
     @OneToMany(cascade = [CascadeType.PERSIST])
-    val hds: List<Part>,
+    val hds: List<Part> = listOf(Part()),
     @OneToMany(cascade = [CascadeType.PERSIST])
-    val ssds: List<Part>,
+    val ssds: List<Part> = listOf(Part()),
     @OneToMany(cascade = [CascadeType.PERSIST])
-    val rams: List<Part>,
+    val rams: List<Part> = listOf(Part()),
     @OneToMany(cascade = [CascadeType.PERSIST])
-    val fans: List<Part>,
+    val fans: List<Part> = listOf(Part()),
     @OneToOne(cascade = [CascadeType.PERSIST])
-    val powerSupply: Part,
+    val powerSupply: Part = Part(),
     @OneToOne(cascade = [CascadeType.PERSIST])
-    val cabinet: Part,
+    val cabinet: Part = Part(),
     @OneToMany(cascade = [CascadeType.PERSIST])
-    val monitors: List<Part>,
+    val monitors: List<Part> = listOf(Part()),
     @OneToOne(cascade = [CascadeType.PERSIST])
-    val keyboard: Part,
+    val keyboard: Part = Part(),
     @OneToOne(cascade = [CascadeType.PERSIST])
-    val mouse: Part
+    val mouse: Part = Part()
 ) {
     val totalValue: Float
         get() {
